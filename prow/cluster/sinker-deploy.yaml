@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  namespace: prow-system
+  name: sinker
+  labels:
+    app: sinker
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: sinker
+    spec:
+      serviceAccountName: "sinker"
+      containers:
+      - name: sinker
+        image: gcr.io/k8s-prow/sinker:v20181119-ffa9de5
+        volumeMounts:
+        - name: config
+          mountPath: /etc/config
+          readOnly: true
+      volumes:
+      - name: config
+        configMap:
+          name: config

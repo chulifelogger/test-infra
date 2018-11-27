@@ -1,0 +1,53 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: deck
+  labels:
+    app: deck
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: deck
+    spec:
+      serviceAccountName: "deck"
+      terminationGracePeriodSeconds: 30
+      containers:
+      - name: deck
+        image: gcr.io/k8s-prow/deck:v20181119-ffa9de5
+        args:
+        - --hook-url=http://hook:8888/plugin-help
+        - --tide-url=http://tide/
+        - --oauth-url=/github-login
+        - --github-oauth-config-file=/etc/github/secret
+        - --cookie-secret=/etc/cookie/secret
+        - --v=10
+        ports:
+          - name: http
+            containerPort: 8080
+        volumeMounts:
+        - name: config
+          mountPath: /etc/config
+          readOnly: true
+        - name: oauth-config
+          mountPath: /etc/github
+          readOnly: true
+        - name: cookie-secret
+          mountPath: /etc/cookie
+          readOnly: true
+      volumes:
+      - name: config
+        configMap:
+          name: config
+      - name: oauth-config
+        secret:
+          secretName: github-oauth-config
+      - name: cookie-secret
+        secret:
+          secretName: cookie

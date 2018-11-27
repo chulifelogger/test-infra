@@ -1,0 +1,11 @@
+periodics:
+- interval: 4h
+  agent: kubernetes
+  name: echo
+  spec:
+    containers:
+    - image: c6h3un/toolbox:0.1.0
+      command: ["curl"]
+      args:
+      - -s
+      - http://echo.dev.svc/

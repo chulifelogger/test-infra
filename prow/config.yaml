@@ -1,0 +1,35 @@
+prowjob_namespace: prowjob
+pod_namespace: prow-test-pods
+log_level: debug
+
+sinker:
+  resync_period: 1m
+  max_prowjob_age: 48h
+  max_pod_age: 30m
+
+deck:
+  tide_update_period: 1s
+
+tide:
+  queries:
+  - repos:
+    - chulifelogger/sample-test-project
+    labels:
+    - lgtm
+    - approved
+    missingLabels:
+    - do-not-merge
+    - do-not-merge/hold
+    - do-not-merge/work-in-progress
+  target_url: http://prow.chulifelogger.tw:31053/tide
+  context_options:
+    skip-unknown-contexts: true
+
+periodics:
+    - interval: 6h
+      agent: kubernetes
+      name: echo-date
+      spec:
+        containers:
+        - image: alpine
+          command: ["/bin/date"]

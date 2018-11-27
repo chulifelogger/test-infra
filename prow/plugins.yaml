@@ -1,0 +1,7 @@
+plugins:
+  chulifelogger:
+  - size
+  - cat
+  - trigger
+  - lgtm
+  - approve
