@@ -1,0 +1,10 @@
+presubmit:
+- name: echo-service
+  always_run: true
+  spec:
+    containers:
+    - image: c6h3un/toolbox:0.1.0
+      command: ["curl"]
+      args:
+      - -s
+      - http://echo.dev.svc/
