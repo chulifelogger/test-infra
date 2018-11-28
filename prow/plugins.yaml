@@ -5,6 +5,7 @@ plugins:
   - trigger
   - lgtm
   - approve
+  - assign
   chulifelogger/test-infra:
   - config-updater
 
