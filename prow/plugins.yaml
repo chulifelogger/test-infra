@@ -19,3 +19,10 @@ config_updater:
       name: plugins
     config/jobs/**/*.yaml:
       name: job-config
+
+approve:
+- repos:
+  - chulifelogger/test-infra
+  - chulifelogger/sample-test-project
+  implicit_self_approve: true
+  lgtm_acts_as_approve: true
