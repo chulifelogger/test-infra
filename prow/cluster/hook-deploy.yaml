@@ -27,6 +27,7 @@ spec:
         - --dry-run=false
         - --github-endpoint=http://ghproxy
         - --github-endpoint=https://api.github.com
+        - --job-config-path=/etc/job-config
         ports:
           - name: http
             containerPort: 8888
@@ -43,6 +44,9 @@ spec:
         - name: plugins
           mountPath: /etc/plugins
           readOnly: true
+        - name: job-config
+          mountPath: /etc/job-config
+          readOnly: true
       volumes:
       - name: hmac
         secret:
@@ -56,3 +60,6 @@ spec:
       - name: plugins
         configMap:
           name: plugins
+      - name: job-config
+        configMap:
+          name: job-config

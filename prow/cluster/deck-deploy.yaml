@@ -26,7 +26,7 @@ spec:
         - --tide-url=http://tide/
         - --oauth-url=/github-login
         - --github-oauth-config-file=/etc/github/secret
-        - --cookie-secret=/etc/cookie/secret
+        - --job-config-path=/etc/job-config
         - --v=10
         ports:
           - name: http
@@ -41,6 +41,9 @@ spec:
         - name: cookie-secret
           mountPath: /etc/cookie
           readOnly: true
+        - name: job-config
+          mountPath: /etc/job-config
+          readOnly: true
       volumes:
       - name: config
         configMap:
@@ -51,3 +54,6 @@ spec:
       - name: cookie-secret
         secret:
           secretName: cookie
+      - name: job-config
+        configMap:
+          name: job-config
