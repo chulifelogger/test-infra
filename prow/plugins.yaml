@@ -5,3 +5,16 @@ plugins:
   - trigger
   - lgtm
   - approve
+  chulifelogger/test-infra:
+  - config-updater
+
+config_updater:
+  maps:
+    config/label_sync.yaml:
+      name: label-config
+    prow/config.yaml:
+      name: config
+    prow/plugins.yaml:
+      name: plugins
+    config/jobs/**/*.yaml:
+      name: job-config
