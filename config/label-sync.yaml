@@ -1,0 +1,107 @@
+---
+default:
+  labels:
+    - color: 0ffa16
+      description: Indicates a PR has been approved by an approver from all required OWNERS files.
+      name: approved
+      target: prs
+      prowPlugin: approve
+      addedBy: approvers
+    - color: e11d21
+      description: DEPRECATED. Indicates that a PR should not merge. Label can only be manually applied/removed.
+      name: do-not-merge
+      target: prs
+      addedBy: humans
+    - color: e11d21
+      description: Indicates that a PR should not merge because it touches files in blocked paths.
+      name: do-not-merge/blocked-paths
+      target: prs
+      prowPlugin: blockade
+      addedBy: prow
+    - color: e11d21
+      description: Indicates that a PR is not yet approved to merge into a release branch.
+      name: do-not-merge/cherry-pick-not-approved
+      target: prs
+      addedBy: prow
+      prowPlugin: cherrypickunapproved
+    - color: e11d21
+      description: Indicates that a PR should not merge because someone has issued a /hold command.
+      name: do-not-merge/hold
+      target: prs
+      prowPlugin: hold
+      addedBy: anyone
+    - color: e11d21
+      description: Indicates that a PR should not merge because it has an invalid OWNERS file in it.
+      name: do-not-merge/invalid-owners-file
+      target: prs
+      prowPlugin: verify-owners
+      addedBy: prow
+    - color: e11d21
+      description: Indicates that a PR should not merge because it's missing one of the release note labels.
+      name: do-not-merge/release-note-label-needed
+      previously:
+        - name: release-note-label-needed
+      target: prs
+      prowPlugin: releasenote
+      addedBy: prow
+    - color: e11d21
+      description: Indicates that a PR should not merge because it is a work in progress.
+      name: do-not-merge/work-in-progress
+      target: prs
+      prowPlugin: wip
+      addedBy: prow
+    - color: 15dd18
+      description: Indicates that a PR is ready to be merged.
+      name: lgtm
+      target: prs
+      prowPlugin: lgtm
+      addedBy: reviewers or members
+    - color: b60205
+      description: Indicates a PR that requires an org member to verify it is safe to test. # This is to prevent spam/abuse of our CI system, and can be circumvented by becoming an org member. Org members can remove this label with the `/ok-to-test` command.
+      name: needs-ok-to-test
+      target: prs
+      prowPlugin: trigger
+      addedBy: prow
+    - color: BDBDBD
+      description: Indicates a PR cannot be merged because it has merge conflicts with HEAD.
+      name: needs-rebase
+      target: prs
+      prowPlugin: needs-rebase
+      addedBy: prow
+    - color: ee9900
+      description: Denotes a PR that changes 100-499 lines, ignoring generated files.
+      name: size/L
+      target: prs
+      prowPlugin: size
+      addedBy: prow
+    - color: eebb00
+      description: Denotes a PR that changes 30-99 lines, ignoring generated files.
+      name: size/M
+      target: prs
+      prowPlugin: size
+      addedBy: prow
+    - color: 77bb00
+      description: Denotes a PR that changes 10-29 lines, ignoring generated files.
+      name: size/S
+      target: prs
+      prowPlugin: size
+      addedBy: prow
+    - color: ee5500
+      description: Denotes a PR that changes 500-999 lines, ignoring generated files.
+      name: size/XL
+      target: prs
+      prowPlugin: size
+      addedBy: prow
+    - color: "009900"
+      description: Denotes a PR that changes 0-9 lines, ignoring generated files.
+      name: size/XS
+      target: prs
+      prowPlugin: size
+      addedBy: prow
+    - color: ee0000
+      description: Denotes a PR that changes 1000+ lines, ignoring generated files.
+      name: size/XXL
+      target: prs
+      prowPlugin: size
+      addedBy: prow
+
