@@ -21,6 +21,11 @@ tide:
     - do-not-merge
     - do-not-merge/hold
     - do-not-merge/work-in-progress
+   - orgs:
+     - chulifelogger
+     labels:
+     - lgtm
+     - approved
   target_url: http://prow.chulifelogger.tw:31053/tide
   context_options:
     skip-unknown-contexts: true
