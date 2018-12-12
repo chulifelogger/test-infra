@@ -12,8 +12,8 @@ deck:
 
 tide:
   queries:
-  - repos:
-    - chulifelogger/sample-test-project
+  - orgs:
+    - chulifelogger
     labels:
     - lgtm
     - approved
@@ -21,12 +21,7 @@ tide:
     - do-not-merge
     - do-not-merge/hold
     - do-not-merge/work-in-progress
-   - orgs:
-     - chulifelogger
-     labels:
-     - lgtm
-     - approved
-  target_url: http://prow.chulifelogger.tw:31053/tide
+  target_url: https://prow.chulifelogger.tw:31540/pr
   context_options:
     skip-unknown-contexts: true
 
