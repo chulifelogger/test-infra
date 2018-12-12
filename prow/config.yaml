@@ -21,7 +21,7 @@ tide:
     - do-not-merge
     - do-not-merge/hold
     - do-not-merge/work-in-progress
-  target_url: https://prow.chulifelogger.tw:31540/pr
+  pr_status_base_url: https://prow.chulifelogger.tw:31540/pr
   context_options:
     skip-unknown-contexts: true
 
