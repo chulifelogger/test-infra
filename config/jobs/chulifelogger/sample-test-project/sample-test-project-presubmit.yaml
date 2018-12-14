@@ -1,5 +1,6 @@
 presubmit:
-- name: echo-service
+- name: sample-echo-test
+  context: sample-echo-test
   always_run: true
   spec:
     containers:
