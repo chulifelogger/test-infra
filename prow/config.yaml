@@ -1,14 +1,24 @@
+---
 prowjob_namespace: prowjob
 pod_namespace: prow-test-pods
 log_level: debug
 
 sinker:
   resync_period: 1m
-  max_prowjob_age: 48h
-  max_pod_age: 30m
+  max_prowjob_age: 120h
+  max_pod_age: 48h
 
 deck:
-  tide_update_period: 1s
+  tide_update_period: 5s
+  spyglass:
+    size_limit: 500000000 # 500MB
+    viewers:
+      "started.json|finished.json":
+      - "metadata"
+      "build-log.txt":
+      - "buildlog"
+      "artifacts/junit.*\\.xml":
+      - "junit"
 
 tide:
   queries:
@@ -22,14 +32,21 @@ tide:
     - do-not-merge/hold
     - do-not-merge/work-in-progress
   pr_status_base_url: https://prow.chulifelogger.tw:31540/pr
+  
   context_options:
     skip-unknown-contexts: true
 
-periodics:
-    - interval: 6h
-      agent: kubernetes
-      name: echo-date
-      spec:
-        containers:
-        - image: alpine
-          command: ["/bin/date"]
+plank:
+  pod_pending_timeout: 60m
+  default_decoration_config:
+    timeout: 7200000000000 # 2h
+    grace_period: 15000000000 # 15s
+    utility_images:
+      clonerefs: "gcr.io/k8s-prow/clonerefs:v20181207-201eb76"
+      initupload: "gcr.io/k8s-prow/initupload:v20181207-201eb76"
+      entrypoint: "gcr.io/k8s-prow/entrypoint:v20181207-201eb76"
+      sidecar: "gcr.io/k8s-prow/sidecar:v20181207-201eb76"
+    gcs_configuration:
+      bucket: "prow-logger"
+      path_strategy: "explicit"
+    gcs_credentials_secret: "prow-bucket"

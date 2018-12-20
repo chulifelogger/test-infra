@@ -1,3 +1,9 @@
+triggers:
+- repos:
+  - chulifelogger
+  trusted_org: chulifelogger
+  only_org_members: true
+
 plugins:
   chulifelogger:
   - size
@@ -6,6 +12,7 @@ plugins:
   - lgtm
   - approve
   - assign
+
   chulifelogger/test-infra:
   - config-updater
 
@@ -22,7 +29,6 @@ config_updater:
 
 approve:
 - repos:
-  - chulifelogger/test-infra
-  - chulifelogger/sample-test-project
+  - chulifelogger
   implicit_self_approve: true
   lgtm_acts_as_approve: true
