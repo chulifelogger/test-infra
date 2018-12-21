@@ -20,14 +20,14 @@ spec:
       terminationGracePeriodSeconds: 30
       containers:
       - name: deck
-        image: gcr.io/k8s-prow/deck:v20181119-ffa9de5
+        image: gcr.io/k8s-prow/deck:v20181207-201eb76
         args:
         - --hook-url=http://hook:8888/plugin-help
         - --tide-url=http://tide/
-        - --oauth-url=/github-login
+        - --oauth-url=/pr
         - --github-oauth-config-file=/etc/github/secret
         - --job-config-path=/etc/job-config
-        - --v=10
+        - --spyglass=true
         ports:
           - name: http
             containerPort: 8080

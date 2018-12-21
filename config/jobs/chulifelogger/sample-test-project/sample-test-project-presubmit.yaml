@@ -1,10 +1,14 @@
-presubmit:
-- name: echo-service
-  always_run: true
-  spec:
-    containers:
-    - image: c6h3un/toolbox:0.1.0
-      command: ["curl"]
-      args:
-      - -s
-      - http://echo.dev.svc/
+presubmits:
+  chulifelogger/sample-test-project:
+  - name: sample-echo-test
+    context: sample-echo-test
+    decorate: true
+    always_run: true
+    skip_report: true
+    spec:
+      containers:
+      - image: c6h3un/toolbox:0.1.0
+        command: ["curl"]
+        args:
+        - -s
+        - http://echo.dev.svc/
